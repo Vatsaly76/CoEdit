@@ -1,0 +1,17 @@
+import { createContext, useContext } from 'react';
+import socket from '../services/socket';
+
+// The context value is the singleton socket instance
+export const SocketContext = createContext(socket);
+
+export function SocketProvider({ children }) {
+  return (
+    <SocketContext.Provider value={socket}>
+      {children}
+    </SocketContext.Provider>
+  );
+}
+
+export function useSocket() {
+  return useContext(SocketContext);
+}

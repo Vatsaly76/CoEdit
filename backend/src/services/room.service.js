@@ -1,22 +1,38 @@
-import redis from '../config/redis.js'
-import { randomUUID } from 'crypto'
+const redis = require('../config/redis');
+const { randomUUID } = require('crypto');
 
-export async function createRoom() {
-  const roomId = randomUUID().slice(0, 8)   // short, shareable ID
-  await redis.hset(`room:${roomId}`, {
+/**
+ * Creates a new room in Redis and returns the short room ID.
+ * @returns {Promise<string>} roomId
+ */
+async function createRoom() {
+  const roomId = randomUUID().slice(0, 8); // short, shareable ID
+  await redis.hSet(`room:${roomId}`, {
     id: roomId,
     code: '',
     language: 'javascript',
-    createdAt: Date.now(),
-  })
-  return roomId
+    createdAt: Date.now().toString(),
+  });
+  return roomId;
 }
 
-export async function getRoom(roomId) {
-  const room = await redis.hgetall(`room:${roomId}`)
-  return Object.keys(room).length ? room : null
+/**
+ * Retrieves a room from Redis by ID.
+ * @param {string} roomId
+ * @returns {Promise<object|null>}
+ */
+async function getRoom(roomId) {
+  const room = await redis.hGetAll(`room:${roomId}`);
+  return Object.keys(room).length ? room : null;
 }
 
-export async function updateCode(roomId, code) {
-  await redis.hset(`room:${roomId}`, { code })
+/**
+ * Persists updated code for a room in Redis.
+ * @param {string} roomId
+ * @param {string} code
+ */
+async function updateCode(roomId, code) {
+  await redis.hSet(`room:${roomId}`, { code });
 }
+
+module.exports = { createRoom, getRoom, updateCode };
