@@ -1,6 +1,7 @@
-import { Router } from 'express';
-import { execute } from '../controllers/execute.controller.js';
-const router = Router();
+const express = require('express');
+const router = express.Router();
+const { executeCode } = require('../controllers/execute.controller');
 
-router.post('/', execute);
-export default router;
+router.post('/', executeCode);
+
+module.exports = router;
