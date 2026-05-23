@@ -1,48 +1,46 @@
-# CoEdit
-# Real-Time Collaborative Code Editor
+# CoEdit 🚀  
+### Real-Time Collaborative Code Editor
 
-A browser-based collaborative coding platform where multiple users can write, edit, run, and share code together in real time.
+A browser-based collaborative coding platform where multiple users can write, edit, run, and share code together in real-time.
 
-Inspired by:
-- Replit
-- VS Code Live Share
-- CodeSandbox
+Inspired by platforms like Replit, VS Code Live Share, and CodeSandbox.
 
 ---
 
-# Features
+# ✨ Features
 
 ## Core Features
-- Real-time collaborative editing
-- Multi-user rooms
-- Live cursor synchronization
-- Syntax highlighting
-- Multi-language support
-- Secure code execution
-- Chat system
-- Authentication & authorization
+
+- ⚡ Real-time collaborative editing
+- 👥 Multi-user rooms & isolated sessions
+- 🖱️ Live cursor synchronization
+- 🔒 Secure Dockerized code execution
+- 🌐 Multi-language support
+- 🎨 Syntax highlighting with Monaco Editor
+- 💬 Built-in chat & presence system
+- 🔑 Authentication & authorization
 
 ---
 
-# Advanced Features
-- File explorer
-- Multi-file projects
-- Shared terminal
-- Session replay
-- Dockerized sandbox execution
-- GitHub OAuth login
-- Theme customization
+## 🚀 Upcoming Features
+
+- 📁 File explorer & multi-file projects
+- 🖥️ Shared terminal
+- ⏪ Session replay
+- 🔗 GitHub OAuth integration
+- 🎨 Theme customization
+- 🤖 AI code assistant
 
 ---
 
-# Tech Stack
+# 🛠️ Tech Stack
 
 ## Frontend
 - React
 - TypeScript
 - Tailwind CSS
-- Socket.IO Client
 - Monaco Editor
+- Socket.IO Client
 
 ## Backend
 - Node.js
@@ -54,16 +52,16 @@ Inspired by:
 - PostgreSQL
 - Redis
 
-## DevOps
+## DevOps & Deployment
 - Docker
 - GitHub Actions
 - Nginx
 
 ---
 
-# System Architecture
+# 🏗️ System Architecture
 
-```txt
+```text
 Client (React Frontend)
         |
    WebSocket Layer
@@ -75,122 +73,120 @@ Backend API Server
 --------------------------------
 |              |               |
 Redis      PostgreSQL     Docker Runner
-(Cache)      (DB)         (Sandbox)
+(Cache)       (DB)          (Sandbox)
 ```
 
 ---
 
-# Folder Structure
+# 📂 Folder Structure
 
-```txt
-/client
-    /src
-        /components
-        /pages
-        /hooks
-        /context
-        /sockets
-
-/server
-    /routes
-    /controllers
-    /middlewares
-    /models
-    /services
-    /sockets
-
-/docker
-/docs
+```text
+CoEdit/
+│
+├── frontend/
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       ├── hooks/
+│       ├── context/
+│       ├── services/
+│       └── sockets/
+│
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   ├── socket/
+│   │   └── utils/
+│   │
+│   ├── docker-compose.yml
+│   └── server.js
+│
+├── docs/
+├── .github/
+│   └── workflows/
+│
+└── README.md
 ```
 
 ---
 
-# Installation
+# 🚀 Installation & Setup
 
-## Clone Repository
+## 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/realtime-code-editor.git
-cd realtime-code-editor
+git clone https://github.com/Vatsaly76/CoEdit.git
+cd CoEdit
 ```
 
 ---
 
-# Frontend Setup
+## 2️⃣ Configure Environment Variables
 
-```bash
-cd client
-npm install
-npm run dev
-```
-
----
-
-# Backend Setup
-
-```bash
-cd server
-npm install
-npm run dev
-```
-
----
-
-# Environment Variables
-
-## Backend `.env`
+Create a `.env` file inside the `backend/` directory.
 
 ```env
 PORT=5000
-JWT_SECRET=your_secret
-DATABASE_URL=your_database_url
-REDIS_URL=your_redis_url
+
+JWT_SECRET=your_secret_key
+
+DATABASE_URL=your_postgresql_url
+
+REDIS_URL=redis://localhost:6379
 ```
 
 ---
 
-# Running With Docker
+## 3️⃣ Backend Setup
 
 ```bash
-docker-compose up --build
+cd backend
+
+# Install dependencies
+npm install
+
+# Start Redis & containers
+docker-compose up -d
+
+# Pull execution containers
+docker pull node:18-alpine
+docker pull python:3.10-alpine
+
+# Start backend server
+npm run dev
 ```
 
 ---
 
-# Supported Languages
+## 4️⃣ Frontend Setup
 
-- C++
-- Python
-- JavaScript
+```bash
+cd ../frontend
 
----
+# Install dependencies
+npm install
 
-# Real-Time Features
-
-## Collaboration
-- Simultaneous editing
-- Cursor tracking
-- User presence
-- Room synchronization
-
-## Communication
-- Live chat
-- Notifications
-- User join/leave updates
+# Start frontend
+npm run dev
+```
 
 ---
 
-# Security Features
+# 🛡️ Security Features
 
-- JWT authentication
-- Docker sandboxing
-- Execution time limits
-- Memory limits
-- Input sanitization
+- 🔐 JWT-based authentication
+- 🐳 Docker sandboxed execution
+- ⏱️ Execution timeout limits
+- 💾 Memory & CPU restrictions
+- 🌍 Network isolation during execution
 
 ---
 
-# API Endpoints
+# 📡 API Reference
 
 ## Authentication
 
@@ -198,6 +194,8 @@ docker-compose up --build
 POST /api/auth/register
 POST /api/auth/login
 ```
+
+---
 
 ## Rooms
 
@@ -207,88 +205,110 @@ POST /api/rooms/join
 GET  /api/rooms/:id
 ```
 
+---
+
 ## Code Execution
 
 ```http
-POST /api/run
+POST /api/execute
 ```
 
 ---
 
-# WebSocket Events
+# 🔌 WebSocket Events
 
-```txt
+```text
 join-room
 leave-room
+
 code-change
+sync-code
+
 cursor-change
+
 chat-message
+
 user-joined
 user-left
 ```
 
 ---
 
-# Deployment
+# 🌍 Deployment Strategy
 
-## Frontend
-Deploy on:
-- Vercel
-
-## Backend
-Deploy on:
-- Railway
-- Render
-
-## Database
-Use:
-- Neon
+| Service | Platform |
+|----------|----------|
+| Frontend | Vercel |
+| Backend | Railway / Render |
+| Database | Neon PostgreSQL |
+| Cache | Redis Cloud |
 
 ---
 
-# Team Responsibilities
+# 👥 Team Responsibilities
 
-| Member | Responsibility |
-|---|---|
-| Frontend Lead | UI, editor, themes |
-| Backend Lead | APIs, auth, DB |
-| Realtime Lead | Socket.IO, synchronization |
-| DevOps Lead | Docker, deployment, CI/CD |
+| Role | Responsibility |
+|------|----------------|
+| Frontend Lead | UI, Monaco integration, themes |
+| Backend Lead | APIs, authentication, database |
+| Realtime Lead | Socket.IO sync & collaboration |
+| DevOps Lead | Docker sandboxing & CI/CD |
 
 ---
 
-# Future Improvements
+# 🚀 Future Improvements
 
-- CRDT-based conflict resolution
-- Voice/video collaboration
-- AI code assistant
+- CRDT-based synchronization (Yjs)
+- Voice & video collaboration
 - Git integration
 - Live interview mode
-- Plugin marketplace
+- AI-powered code suggestions
+- Persistent project storage
 
 ---
 
-# Screenshots
-
-Add screenshots/gifs here after implementation.
-
----
-
-# Contributing
+# 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
-3. Commit changes
-4. Open a pull request
+
+```bash
+git checkout -b feature/AmazingFeature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add AmazingFeature"
+```
+
+4. Push to the branch
+
+```bash
+git push origin feature/AmazingFeature
+```
+
+5. Open a Pull Request
 
 ---
 
-# License
+# 📝 License
 
-MIT License
+Distributed under the MIT License.
 
 ---
 
-# Authors
+# ❤️ Acknowledgements
 
-Developed collaboratively using GitHub workflow and Agile development practices.
+Inspired by:
+
+- Replit
+- VS Code Live Share
+- CodeSandbox
+
+---
+
+# ⭐ Support
+
+If you like this project, consider giving it a star on GitHub ⭐
+Developed collaboratively using Agile development practices.
