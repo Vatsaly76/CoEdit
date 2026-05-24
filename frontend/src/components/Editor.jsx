@@ -3,6 +3,7 @@ import MonacoEditor from '@monaco-editor/react';
 const LANGUAGE_DEFAULTS = {
   javascript: '// Start coding in JavaScript...\nconsole.log("Hello, CoEdit!");\n',
   python: '# Start coding in Python...\nprint("Hello, CoEdit!")\n',
+  cpp: '// Start coding in C++...\n#include <iostream>\n\nint main() {\n    std::cout << "Hello, CoEdit!" << std::endl;\n    return 0;\n}\n',
 };
 
 export default function Editor({ code, language, onChange, onCursorChange }) {

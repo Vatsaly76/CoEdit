@@ -11,6 +11,11 @@ class ExecuteService {
       python: { 
         image: 'python:3.10-alpine', 
         cmd: ['python', '-c', code] 
+      },
+      cpp: {
+        image: 'gcc:13',
+        cmd: ['sh', '-c', 'printf \'%s\\n\' "$CODE" > main.cpp && g++ main.cpp && ./a.out'],
+        env: [`CODE=${code}`]
       }
     };
 
@@ -24,6 +29,7 @@ class ExecuteService {
       const container = await docker.createContainer({
         Image: config.image,
         Cmd: config.cmd,
+        Env: config.env || [],
         Tty: false,
         HostConfig: {
           AutoRemove: true,

@@ -1,6 +1,7 @@
 const LANGUAGES = [
   { value: 'javascript', label: 'JavaScript', icon: '🟨' },
   { value: 'python',     label: 'Python',     icon: '🐍' },
+  { value: 'cpp',        label: 'C++',        icon: '⚙️' },
 ];
 
 export default function Toolbar({ language, onLanguageChange, onRun, isRunning, connected, roomId }) {
